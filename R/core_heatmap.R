@@ -7,6 +7,8 @@
 #'                  relative abundance threshold (inclusive).
 #' @param ubiquity A number (between 0 and 100) or NULL representing the
 #'                 ubiquity of ASV/OTU in sample threshold (inclusive).
+#' @param pheatmap A boolean specifying the use or not of pheatmap to draw
+#'                 the heatmap. Default is set to FALSE.
 #'
 #'
 #' @return Plot a heatmap.
@@ -17,7 +19,7 @@
 #' core_heatmap(df, abundance = 0.1, ubiquity = 0.8)
 #'
 #' @export
-core_heatmap <- function(x, abundance = 0.1, ubiquity = 0.8) {
+core_heatmap <- function(x, abundance = 0.1, ubiquity = 0.8, pheatmap = FALSE) {
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
@@ -74,8 +76,17 @@ core_heatmap <- function(x, abundance = 0.1, ubiquity = 0.8) {
              )
            ]
 
-  df <- scale(df)
+  # Get relative abundance for columns
+  df <- proportions(as.matrix(df), margin = 2)
 
-  stats::heatmap(as.matrix(df))
+  if (pheatmap) {
+    pheatmap::pheatmap(df)
+  } else {
+    stats::heatmap(df, cexRow = 1, cexCol = 1.2, margins = c(10, 7),
+                   col = grDevices::heat.colors(ncol(df)))
+
+    graphics::legend(x = "bottomright", legend = c("min", "med", "max"),
+                     fill = grDevices::heat.colors(ncol(df)))
+  }
 
 }

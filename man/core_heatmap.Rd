@@ -4,7 +4,7 @@
 \alias{core_heatmap}
 \title{Draw the heatmap of the core members across samples}
 \usage{
-core_heatmap(x, abundance = 0.1, ubiquity = 0.8)
+core_heatmap(x, abundance = 0.1, ubiquity = 0.8, pheatmap = FALSE)
 }
 \arguments{
 \item{x}{A data frame representing a ASV/OTU table with raw counts or
@@ -16,6 +16,9 @@ relative abundance threshold (inclusive).}
 
 \item{ubiquity}{A number (between 0 and 100) or NULL representing the
 ubiquity of ASV/OTU in sample threshold (inclusive).}
+
+\item{pheatmap}{A boolean specifying the use or not of pheatmap to draw
+the heatmap. Default is set to FALSE.}
 }
 \value{
 Plot a heatmap.

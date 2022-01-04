@@ -28,7 +28,7 @@ Yes, all the function can take as input a phyloseq object. When it is the case,
 the function `core_microbiota` return a phyloseq object.
 
 This package have no external dependencies for your joy. We therefore,
-extensively use R Base and only few packages as suggests.
+extensively use R Base and only pheatmap, covr and usethis as suggests.
 
 ## Installation
 
