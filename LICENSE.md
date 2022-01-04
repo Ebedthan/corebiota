@@ -222,10 +222,10 @@ You may convey a covered work in object code form under the terms of sections 4 
 5, provided that you also convey the machine-readable Corresponding Source under the
 terms of this License, in one of these ways:
 
-* **a)** Convey the object code in, or embodied in, a physical product (including a
+* **a)**  Convey the object code in, or embodied in, a physical product (including a
 physical distribution medium), accompanied by the Corresponding Source fixed on a
 durable physical medium customarily used for software interchange.
-* **b)** Convey the object code in, or embodied in, a physical product (including a
+* **b)**  Convey the object code in, or embodied in, a physical product (including a
 physical distribution medium), accompanied by a written offer, valid for at least
 three years and valid for as long as you offer spare parts or customer support for
 that product model, to give anyone who possesses the object code either **(1)** a copy of
@@ -234,7 +234,7 @@ License, on a durable physical medium customarily used for software interchange,
 a price no more than your reasonable cost of physically performing this conveying of
 source, or **(2)** access to copy the Corresponding Source from a network server at no
 charge.
-* **c)** Convey individual copies of the object code with a copy of the written offer to
+* **c)**  Convey individual copies of the object code with a copy of the written offer to
 provide the Corresponding Source. This alternative is allowed only occasionally and
 noncommercially, and only if you received the object code with such an offer, in
 accord with subsection 6b.
@@ -247,7 +247,7 @@ code is a network server, the Corresponding Source may be on a different server
 provided you maintain clear directions next to the object code saying where to find
 the Corresponding Source. Regardless of what server hosts the Corresponding Source,
 you remain obligated to ensure that it is available for as long as needed to satisfy
-these requirements.
+these requirements.  
 * **e)** Convey the object code using peer-to-peer transmission, provided you inform
 other peers where the object code and Corresponding Source of the work are being
 offered to the general public at no charge under subsection 6d.
@@ -318,15 +318,15 @@ supplement the terms of this License with terms:
 
 * **a)** Disclaiming warranty or limiting liability differently from the terms of
 sections 15 and 16 of this License; or
-* **b)** Requiring preservation of specified reasonable legal notices or author
+* **b)**  Requiring preservation of specified reasonable legal notices or author
 attributions in that material or in the Appropriate Legal Notices displayed by works
 containing it; or
-* **c)** Prohibiting misrepresentation of the origin of that material, or requiring that
+* **c)**  Prohibiting misrepresentation of the origin of that material, or requiring that
 modified versions of such material be marked in reasonable ways as different from the
 original version; or
 * **d)** Limiting the use for publicity purposes of names of licensors or authors of the
 material; or
-* **e)** Declining to grant rights under trademark law for use of some trade names,
+* **e)**  Declining to grant rights under trademark law for use of some trade names,
 trademarks, or service marks; or
 * **f)** Requiring indemnification of licensors and authors of that material by anyone
 who conveys the material (or modified versions of it) with contractual assumptions of
