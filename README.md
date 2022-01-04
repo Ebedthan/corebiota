@@ -11,48 +11,35 @@
 
 The goal of coremicrobiota is to provide a set of functions to perform core
 microbiota analysis from an ASV/OTU table.
-First, with the function `sniff` you can rapidly get a glimpse at how many 
+First, with the function [`sniff`](https://ebedthan.github.io/coremicrobiota/reference/sniff.html) you can rapidly get a glimpse at how many 
 members compose your core microbiota with the given minimum relative abundance and
 ubiquity. To have an idea of how to choose good values for your minimum relative 
-abundance and ubiquity, you can make use of the `distribution` function, which will
-plot a histogram of distribution of both values across your dataset. Once, you are good to go you can now call the `core_microbiota` function to extract ASV/OTU names 
+abundance and ubiquity, you can make use of the [`distribution`](https://ebedthan.github.io/coremicrobiota/reference/distribution.html) function, which will
+plot a histogram of distribution of both values across your dataset. Once, you are good to go you can now call the [`core_microbiota`](https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html) function to extract ASV/OTU names 
 composing your core microbiota (with their corresponding relative abundance across 
-all the dataset and ubiquity if you want). Finally, we offer you a function `core_heatmap` to draw the ASVs/OTUs relative abundance across samples.
-A utility function `get_core_table` is also provided to compute total counts,
+all the dataset and ubiquity if you want). Finally, we offer you a function [`core_heatmap`](https://ebedthan.github.io/coremicrobiota/reference/core_heatmap.html) to draw the ASVs/OTUs relative abundance across samples.
+A utility function [`get_core_table`](https://ebedthan.github.io/coremicrobiota/reference/get_core_table.html) is also provided to compute total counts,
 relative sequence abundance across all dataset and ubiquity for each ASV/OTU.
 
 Yes, all the function can take as input a phyloseq object. When it is the case,
 the function `core_microbiota` return a phyloseq object.
 
-This package aims to have minimal dependencies for your joy. We therefore,
+This package have no external dependencies for your joy. We therefore,
 extensively use R Base and only few packages as suggests.
 
 ## Installation
 
 You can install the development version of coremicrobiota like so:
 
-In your terminal do:
-
-```
-# Clone this GitHub repository
-git clone https://github.com/Ebedthan/coremicrobiota
-
-# Or if you have GH CLI...
-gh repo clone Ebedthan/coremicrobiota
-```
-
-Or simply click the green `Code` button above to download a zip version of
-the repository and decompress it locally.
-
 ``` r
 # Install devtools package (if not already done!)
-install.package("devtools")
+install.package("remotes")
 
 # Load devtools package
-library(devtools)
+library(remotes)
 
 # Install coremicrobiota package
-install_github(coremicrobiota)
+install_github("Ebedthan/coremicrobiota")
 ```
 
 ## Example
