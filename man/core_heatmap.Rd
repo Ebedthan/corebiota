@@ -4,18 +4,12 @@
 \alias{core_heatmap}
 \title{Draw the heatmap of the core members across samples}
 \usage{
-core_heatmap(x, abundance = 0.1, ubiquity = 0.8, pheatmap = FALSE)
+core_heatmap(x, pheatmap = FALSE)
 }
 \arguments{
 \item{x}{A data frame representing a ASV/OTU table with raw counts or
 phyloseq object. The ASVs/OTUs names should be set as the row
 names of the data frame.}
-
-\item{abundance}{A number (between 0 and 100) or NULL representing the
-relative abundance threshold (inclusive).}
-
-\item{ubiquity}{A number (between 0 and 100) or NULL representing the
-ubiquity of ASV/OTU in sample threshold (inclusive).}
 
 \item{pheatmap}{A boolean specifying the use or not of pheatmap to draw
 the heatmap. Default is set to FALSE.}
@@ -29,6 +23,6 @@ Draw the heatmap of the core members across samples
 \examples{
 df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 rownames(df) <- letters[1:10]
-core_heatmap(df, abundance = 0.1, ubiquity = 0.8)
+core_heatmap(get_core_table(df))
 
 }
