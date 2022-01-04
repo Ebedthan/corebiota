@@ -71,36 +71,36 @@
 <div class="section level2">
 <h2 id="a-simple-workflow-for-core-microbiota-analysis">A Simple Workflow for Core Microbiota Analysis<a class="anchor" aria-label="anchor" href="#a-simple-workflow-for-core-microbiota-analysis"></a>
 </h2>
-<p>The goal of coremicrobiota is to provide a set of functions to perform core microbiota analysis from an ASV/OTU table. First, with the function <code>sniff</code> you can rapidly get a glimpse at how many members compose your core microbiota with the given minimum relative abundance and ubiquity. To have an idea of how to choose good values for your minimum relative abundance and ubiquity, you can make use of the <code>distribution</code> function, which will plot a histogram of distribution of both values across your dataset. Once, you are good to go you can now call the <code>core_microbiota</code> function to extract ASV/OTU names composing your core microbiota (with their corresponding relative abundance across all the dataset and ubiquity if you want). Finally, we offer you a function <code>core_heatmap</code> to draw the ASVs/OTUs relative abundance across samples. A utility function <code>get_core_table</code> is also provided to compute total counts, relative sequence abundance across all dataset and ubiquity for each ASV/OTU.</p>
+<p>The goal of coremicrobiota is to provide a set of functions to easily perform core microbiota analysis from an ASV/OTU table.</p>
+<ul>
+<li>First, with the function <a href="https://ebedthan.github.io/coremicrobiota/reference/sniff.html" class="external-link"><code>sniff</code></a> you can rapidly get a glimpse at how many members compose your core microbiota with the given minimum relative abundance and ubiquity.</li>
+<li>To have an idea of how to choose good values for your minimum relative abundance and ubiquity, you can make use of the <a href="https://ebedthan.github.io/coremicrobiota/reference/distribution.html" class="external-link"><code>distribution</code></a> function, which will plot two histograms of distribution of both values across your dataset.</li>
+<li>Once, you are good to go you can now call the <a href="https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html" class="external-link"><code>core_microbiota</code></a> function to extract ASV/OTU names composing your core microbiota (with their corresponding relative abundance across all the dataset and ubiquity if you want).</li>
+<li>Finally, we offer you a function <a href="https://ebedthan.github.io/coremicrobiota/reference/core_heatmap.html" class="external-link"><code>core_heatmap</code></a> to draw the ASVs/OTUs relative abundance across samples.</li>
+<li>A utility function <a href="https://ebedthan.github.io/coremicrobiota/reference/get_core_table.html" class="external-link"><code>get_core_table</code></a> is also provided to compute total counts, relative sequence abundance across all dataset and ubiquity for each ASV/OTU.</li>
+</ul>
 <p>Yes, all the function can take as input a phyloseq object. When it is the case, the function <code>core_microbiota</code> return a phyloseq object.</p>
-<p>This package aims to have minimal dependencies for your joy. We therefore, extensively use R Base and only few packages as suggests.</p>
+<p>This package have no external dependencies for your joy. We therefore, extensively use R Base and only few packages as suggests.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of coremicrobiota like so:</p>
-<p>In your terminal do:</p>
-<pre><code># Clone this GitHub repository
-git clone https://github.com/Ebedthan/coremicrobiota
-
-# Or if you have GH CLI...
-gh repo clone Ebedthan/coremicrobiota</code></pre>
-<p>Or simply click the green <code>Code</code> button above to download a zip version of the repository and decompress it locally.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Install devtools package (if not already done!)</span>
-<span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">install.package</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 
 <span class="co"># Load devtools package</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span>
 
 <span class="co"># Install coremicrobiota package</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="va">coremicrobiota</span><span class="op">)</span></code></pre></div>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"Ebedthan/coremicrobiota"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">coremicrobiota</span><span class="op">)</span>
 
 <span class="co"># Some fake data</span>

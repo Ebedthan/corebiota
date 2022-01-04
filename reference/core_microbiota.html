@@ -42,19 +42,24 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">5</span>, ubiquity <span class="op">=</span> <span class="fl">80</span>, stats <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">x</span>, abundance <span class="op">=</span> <span class="fl">0.1</span>, ubiquity <span class="op">=</span> <span class="fl">0.8</span>, stats <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>df</dt>
-<dd><p>A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.</p></dd>
+    <dl><dt>x</dt>
+<dd><p>A data frame representing a ASV/OTU table with raw counts or
+phyloseq object. The ASVs/OTUs names should be set as the row
+names of the data frame.</p></dd>
 <dt>abundance</dt>
-<dd><p>A number (between 0 and 100) representing the relative abundance threshold (inclusive).</p></dd>
+<dd><p>A number (between 0 and 100) or NULL representing the
+relative abundance threshold (inclusive).</p></dd>
 <dt>ubiquity</dt>
-<dd><p>A number (between 0 and 100) representing the ubiquity of ASV/OTU in sample threshold (inclusive).</p></dd>
+<dd><p>A number (between 0 and 100) or NULL representing the
+ubiquity of ASV/OTU in sample threshold (inclusive).</p></dd>
 <dt>stats</dt>
-<dd><p>A boolean specifying if relative abundance and ubiquity should be outputted along with ASV/OTU names.</p></dd>
+<dd><p>A boolean value (default FALSE) to enable outputting of relative
+abundance and ubiquity along ASVs/OTUs names.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -65,13 +70,18 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sample_x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sample_y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">10</span>, ubiquity <span class="op">=</span> <span class="fl">100</span>, stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">0.01</span>, ubiquity <span class="op">=</span> <span class="fl">1</span>, stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   relative_abundance ubiquity</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f          0.1090909      100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g          0.1272727      100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h          0.1454545      100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i          0.1636364      100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j          0.1818182      100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a         0.01818182        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b         0.03636364        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c         0.05454545        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d         0.07272727        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e         0.09090909        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f         0.10909091        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g         0.12727273        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h         0.14545455        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i         0.16363636        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j         0.18181818        1</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
