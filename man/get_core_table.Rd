@@ -4,13 +4,16 @@
 \alias{get_core_table}
 \title{Compute relative sequence abundance and ubiquity across all samples}
 \usage{
-get_core_table(df)
+get_core_table(x)
 }
 \arguments{
-\item{df}{A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.}
+\item{x}{A data frame representing a ASV/OTU table with raw counts or
+phyloseq object. The ASVs/OTUs names should be set as the row
+names of the data frame.}
 }
 \value{
-A data frame with raw counts, relative abundance, and ubiquity of ASVs/OTUs.
+A data frame with raw counts, relative abundance, and ubiquity of
+        ASVs/OTUs.
 }
 \description{
 Compute relative sequence abundance and ubiquity across all samples

@@ -9,16 +9,20 @@
 
 ## A Simple Workflow for Core Microbiota Analysis
 
-The goal of coremicrobiota is to provide a set of functions to perform core
+The goal of coremicrobiota is to provide a set of functions to easily perform core
 microbiota analysis from an ASV/OTU table.
-First, with the function [`sniff`](https://ebedthan.github.io/coremicrobiota/reference/sniff.html) you can rapidly get a glimpse at how many 
+
+* First, with the function [`sniff`](https://ebedthan.github.io/coremicrobiota/reference/sniff.html) you can rapidly get a glimpse at how many 
 members compose your core microbiota with the given minimum relative abundance and
-ubiquity. To have an idea of how to choose good values for your minimum relative 
+ubiquity. 
+* To have an idea of how to choose good values for your minimum relative 
 abundance and ubiquity, you can make use of the [`distribution`](https://ebedthan.github.io/coremicrobiota/reference/distribution.html) function, which will
-plot a histogram of distribution of both values across your dataset. Once, you are good to go you can now call the [`core_microbiota`](https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html) function to extract ASV/OTU names 
+plot two histograms of distribution of both values across your dataset. 
+* Once, you are good to go you can now call the [`core_microbiota`](https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html) function to extract ASV/OTU names 
 composing your core microbiota (with their corresponding relative abundance across 
-all the dataset and ubiquity if you want). Finally, we offer you a function [`core_heatmap`](https://ebedthan.github.io/coremicrobiota/reference/core_heatmap.html) to draw the ASVs/OTUs relative abundance across samples.
-A utility function [`get_core_table`](https://ebedthan.github.io/coremicrobiota/reference/get_core_table.html) is also provided to compute total counts,
+all the dataset and ubiquity if you want). 
+* Finally, we offer you a function [`core_heatmap`](https://ebedthan.github.io/coremicrobiota/reference/core_heatmap.html) to draw the ASVs/OTUs relative abundance across samples.
+* A utility function [`get_core_table`](https://ebedthan.github.io/coremicrobiota/reference/get_core_table.html) is also provided to compute total counts,
 relative sequence abundance across all dataset and ubiquity for each ASV/OTU.
 
 Yes, all the function can take as input a phyloseq object. When it is the case,

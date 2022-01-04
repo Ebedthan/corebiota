@@ -1,59 +1,94 @@
 #' Get core microbiota from ASV/OTU table
 #'
-#' @param df A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.
-#' @param abundance A number (between 0 and 100) representing the relative abundance threshold (inclusive).
-#' @param ubiquity A number (between 0 and 100) representing the ubiquity of ASV/OTU in sample threshold (inclusive).
-#' @param stats A boolean specifying if relative abundance and ubiquity should be outputted along with ASV/OTU names.
+#' @param x A data frame representing a ASV/OTU table with raw counts or
+#'          phyloseq object. The ASVs/OTUs names should be set as the row
+#'          names of the data frame.
+#' @param abundance A number (between 0 and 100) or NULL representing the
+#'                  relative abundance threshold (inclusive).
+#' @param ubiquity A number (between 0 and 100) or NULL representing the
+#'                 ubiquity of ASV/OTU in sample threshold (inclusive).
+#' @param stats A boolean value (default FALSE) to enable outputting of relative
+#'              abundance and ubiquity along ASVs/OTUs names.
+#'
 #'
 #' @return A list of ASV/OTU names belonging to the defined core microbiota.
 #'
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 #' rownames(df) <- letters[1:10]
-#' core_microbiota(df, abundance = 10, ubiquity = 100, stats = TRUE)
+#' core_microbiota(df, abundance = 0.01, ubiquity = 1, stats = TRUE)
 #'
 #' @export
-core_microbiota <- function(df, abundance = 5, ubiquity = 80, stats = FALSE) {
-  # Input validation
+core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE) {
+  # Input validation -----------------------------------------------------------
+  # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
-    if (abundance < 0 & abundance > 100) {
-      stop("Supplied relative abundance is not in percentage")
+    if (ubiquity < 0) {
+      stop(
+        paste0("Supplied abundance: ", deparse(abundance),", is less than 0.")
+      )
+    } else if (abundance > 1) {
+      stop(
+        paste0("Supplied abundance: ", deparse(abundance),", is greater than 1.",
+               " Did you mean ", abundance/100, "?")
+      )
     }
   }
 
+  # If ubiquity value is not NULL and not between 0 an 1 then stop
   if (!is.null(ubiquity)) {
-    if (ubiquity < 0 & ubiquity > 100) {
-      stop("Supplied ubiquity is not in percentage")
+    if (ubiquity < 0) {
+      stop(
+        paste0("Supplied ubiquity: ", deparse(ubiquity),", is less than 0.")
+      )
+    } else if (ubiquity > 1) {
+      stop(
+        paste0("Supplied ubiquity: ", deparse(ubiquity),", is greater than 1.",
+               "Did you mean ", ubiquity/100)
+      )
     }
   }
 
-  df <- get_core_table(df)
+  # Data preparation -----------------------------------------------------------
+  # Get core table with relative abundance, ubiquity and total counts
+  df <- get_core_table(x)
 
-  df_result <- ""
+  # Start filtering using supplied parameters ----------------------------------
+  # If ubiquity is null, then omit filtering with this value
   if (is.null(ubiquity)) {
-    df_result <- df[
-      (df["relative_abundance"] >= (abundance / 100)),
-    ]
+    df <- df[(df["relative_abundance"] >= abundance),]
+
+    # If abundance is null, then omit filtering with this value
   } else if (is.null(abundance)) {
-    df_result <- df[
-      (df["ubiquity"] >= ubiquity),
-    ]
+    df <- df[(df["ubiquity"] >= ubiquity),]
+
+    # Filtering using both criteria
   } else {
-    df_result <- df[
-      (df["relative_abundance"] >= (abundance / 100) & df["ubiquity"] >= ubiquity),
+    df <- df[
+      (df["relative_abundance"] >= abundance & df["ubiquity"] >= ubiquity),
     ]
   }
 
+  # Outputting -----------------------------------------------------------------
+  # If stats is FALSE, then just ouput the number of ASVs/OTUs
   if (!stats) {
-    if (nrow(df_result) == 0) {
-      cat(paste0("No ASVs/OTUs was found at the defined abundance (", abundance, " %) and (", ubiquity, " %) ubiquity threshold"))
+    if (nrow(df) == 0) {
+      cat(
+        paste0("No ASVs/OTUs was found at the defined abundance (",
+               abundance,
+               " %) and (",
+               ubiquity,
+               " %) ubiquity threshold")
+        )
     } else {
-      return(rownames(df_result))
+      return(rownames(df))
     }
+  # If stats is TRUE, then output ASVs/OTUs names along with relative abundance
+  # and ubiquity value
   } else {
-    stats_df <- data.frame(relative_abundance = df_result$relative_abundance,
-                           ubiquity = df_result$ubiquity)
-    rownames(stats_df) <- rownames(df_result)
+    stats_df <- data.frame(relative_abundance = df$relative_abundance,
+                           ubiquity = df$ubiquity)
+    rownames(stats_df) <- rownames(df)
 
     return(stats_df)
   }

@@ -1,48 +1,78 @@
 #' Draw the heatmap of the core members across samples
 #'
-#' @param df A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.
-#' @param abundance A number (between 0 and 100) representing the relative abundance threshold (inclusive).
-#' @param ubiquity A number (between 0 and 100) representing the ubiquity of ASV/OTU in sample threshold (inclusive).
+#' @param x A data frame representing a ASV/OTU table with raw counts or
+#'          phyloseq object. The ASVs/OTUs names should be set as the row
+#'          names of the data frame.
+#' @param abundance A number (between 0 and 100) or NULL representing the
+#'                  relative abundance threshold (inclusive).
+#' @param ubiquity A number (between 0 and 100) or NULL representing the
+#'                 ubiquity of ASV/OTU in sample threshold (inclusive).
+#'
 #'
 #' @return Plot a heatmap.
 #'
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 #' rownames(df) <- letters[1:10]
-#' core_heatmap(df, abundance = 10, ubiquity = 100)
+#' core_heatmap(df, abundance = 0.1, ubiquity = 0.8)
 #'
 #' @export
-core_heatmap <- function(df, abundance = 5, ubiquity = 80) {
-  # Input validation
+core_heatmap <- function(x, abundance = 0.1, ubiquity = 0.8) {
+  # Input validation -----------------------------------------------------------
+  # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
-    if (abundance < 0 & abundance > 100) {
-      stop("Supplied relative abundance is not in percentage")
+    if (ubiquity < 0) {
+      stop(
+        paste0("Supplied abundance: ", deparse(abundance),", is less than 0.")
+      )
+    } else if (abundance > 1) {
+      stop(
+        paste0("Supplied abundance: ", deparse(abundance),", is greater than 1.",
+               " Did you mean ", abundance/100, "?")
+      )
     }
   }
 
+  # If ubiquity value is not NULL and not between 0 an 1 then stop
   if (!is.null(ubiquity)) {
-    if (ubiquity < 0 & ubiquity > 100) {
-      stop("Supplied ubiquity is not in percentage")
+    if (ubiquity < 0) {
+      stop(
+        paste0("Supplied ubiquity: ", deparse(ubiquity),", is less than 0.")
+      )
+    } else if (ubiquity > 1) {
+      stop(
+        paste0("Supplied ubiquity: ", deparse(ubiquity),", is greater than 1.",
+               "Did you mean ", ubiquity/100)
+      )
     }
   }
 
-  df <- get_core_table(df)
+  # Data preparation -----------------------------------------------------------
+  # Get core table with relative abundance, ubiquity and total counts
+  df <- get_core_table(x)
 
+  # Start filtering using supplied parameters ----------------------------------
+  # If ubiquity is null, then omit filtering with this value
   if (is.null(ubiquity)) {
-    df <- df[
-      (df["relative_abundance"] >= (abundance / 100)),
-    ]
+    df <- df[(df["relative_abundance"] >= abundance),]
+
+    # If abundance is null, then omit filtering with this value
   } else if (is.null(abundance)) {
-    df <- df[
-      (df["ubiquity"] >= ubiquity),
-    ]
+    df <- df[(df["ubiquity"] >= ubiquity),]
+
+    # Filtering using both criteria
   } else {
     df <- df[
-      (df["relative_abundance"] >= (abundance / 100) & df["ubiquity"] >= ubiquity),
+      (df["relative_abundance"] >= abundance & df["ubiquity"] >= ubiquity),
     ]
   }
 
-  df <- df[,-which(names(df) %in% c("total_counts", "relative_abundance", "ubiquity"))]
+  # Get data frame with wanted columns only
+  df <- df[,
+           - which(
+             names(df) %in% c("total_counts", "relative_abundance", "ubiquity")
+             )
+           ]
 
   df <- scale(df)
 

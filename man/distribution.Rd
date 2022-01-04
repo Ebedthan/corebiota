@@ -4,15 +4,15 @@
 \alias{distribution}
 \title{Draw the distribution of the relative abundance or ubiquity}
 \usage{
-distribution(df, type = "abundance")
+distribution(x)
 }
 \arguments{
-\item{df}{A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.}
-
-\item{type}{A character string specifying the type of histogram to plot. Can be either abundance or ubiquity.}
+\item{x}{A data frame representing a ASV/OTU table with raw counts or
+phyloseq object. The ASVs/OTUs names should be set as the row
+names of the data frame.}
 }
 \value{
-Plot a histogram.
+Plot a histogram of relative abundance and ubiquity.
 }
 \description{
 Draw the distribution of the relative abundance or ubiquity
@@ -20,6 +20,6 @@ Draw the distribution of the relative abundance or ubiquity
 \examples{
 df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 rownames(df) <- letters[1:10]
-distribution(df, type = "abundance")
+distribution(df)
 
 }

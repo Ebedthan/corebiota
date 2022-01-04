@@ -1,8 +1,11 @@
 #' Compute relative sequence abundance and ubiquity across all samples
 #'
-#' @param df A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.
+#' @param x A data frame representing a ASV/OTU table with raw counts or
+#'          phyloseq object. The ASVs/OTUs names should be set as the row
+#'          names of the data frame.
 #'
-#' @return A data frame with raw counts, relative abundance, and ubiquity of ASVs/OTUs.
+#' @return A data frame with raw counts, relative abundance, and ubiquity of
+#'         ASVs/OTUs.
 #'
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
@@ -10,25 +13,40 @@
 #' get_core_table(df)
 #'
 #' @export
-get_core_table <- function(df) {
-  if (!is.data.frame(df)) {
-    stop("Provided tbl object is not a matrix or a data frame")
+get_core_table <- function(x) {
+  # Input validation -----------------------------------------------------------
+  # If object is not a data frame or phyloseq object then stop
+  if (!is.data.frame(x) & class(x) != "phyloseq") {
+    stop(
+      paste("Supplied 'x' object is neither a data frame or a phyloseq object.",
+           "\n  Please check the class of your input object:",
+           deparse(substitute(x))
+           )
+    )
   }
 
-  number_of_cols <- ncol(df)
+  # Data preparation -----------------------------------------------------------
+  # Get ASV/OTU table from phyloseq object
+  if (class(x) == "phyloseq") {
+    # The phyloseq object is a S4 class
+    x <- as.data.frame(x@otu_table)
+  }
 
-  # Ubiquity computing
-  ubiquity_vec <- round((rowSums(df != 0) / number_of_cols) * 100)
+  # Initial number of column for further computation
+  number_of_cols <- ncol(x)
 
-  # Total count computing
-  df["total_counts"] <- rowSums(df)
-  total_abundance <- sum(df["total_counts"])
+  # Ubiquity computation
+  ubiquity_vec <- round((rowSums(x != 0) / number_of_cols))
+
+  # Total count computation
+  x["total_counts"] <- rowSums(x)
+  total_abundance <- sum(x["total_counts"])
 
   # Add ubiquity to data frame
-  df["ubiquity"] <- ubiquity_vec
+  x["ubiquity"] <- ubiquity_vec
 
   # Relative abundance computing
-  df["relative_abundance"] <- df["total_counts"] / total_abundance
+  x["relative_abundance"] <- x["total_counts"] / total_abundance
 
-  return(df)
+  return(x)
 }
