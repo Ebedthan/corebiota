@@ -1,19 +1,18 @@
-#' Get core microbiota from ASV/OTU table
+#' Sniff the number of members of the core microbiota given the parameters
 #'
 #' @param df A data frame which represents the ASV/OTU table with raw counts. The ASVs/OTUs names should be set as the row names of the data frame.
 #' @param abundance A number (between 0 and 100) representing the relative abundance threshold (inclusive).
 #' @param ubiquity A number (between 0 and 100) representing the ubiquity of ASV/OTU in sample threshold (inclusive).
-#' @param stats A boolean specifying if relative abundance and ubiquity should be outputted along with ASV/OTU names.
 #'
-#' @return A list of ASV/OTU names belonging to the defined core microbiota.
+#' @return The number of members of the core microbiota given the parameters.
 #'
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 #' rownames(df) <- letters[1:10]
-#' core_microbiota(df, abundance = 10, ubiquity = 100, stats = TRUE)
+#' sniff(df)
 #'
 #' @export
-core_microbiota <- function(df, abundance = 5, ubiquity = 80, stats = FALSE) {
+sniff <- function(df, abundance = 5, ubiquity = 80) {
   # Input validation
   if (!is.null(abundance)) {
     if (abundance < 0 & abundance > 100) {
@@ -44,18 +43,9 @@ core_microbiota <- function(df, abundance = 5, ubiquity = 80, stats = FALSE) {
     ]
   }
 
-  if (!stats) {
-    if (nrow(df_result) == 0) {
-      cat(paste0("No ASVs/OTUs was found at the defined abundance (", abundance, " %) and (", ubiquity, " %) ubiquity threshold"))
-    } else {
-      return(rownames(df_result))
-    }
+  if (nrow(df_result) == 0) {
+    cat(paste0("No ASVs/OTUs was found at the defined abundance (", abundance, " %) and (", ubiquity, " %) ubiquity threshold"))
   } else {
-    stats_df <- data.frame(relative_abundance = df_result$relative_abundance,
-                           ubiquity = df_result$ubiquity)
-    rownames(stats_df) <- rownames(df_result)
-
-    return(stats_df)
+    cat(paste(nrow(df_result), "ASVs/OTUs were found as members of the core microbiota"))
   }
-
 }
