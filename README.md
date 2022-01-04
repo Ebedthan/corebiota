@@ -4,6 +4,7 @@
 [![R-CMD-check](https://github.com/Ebedthan/coremicrobiota/workflows/R-CMD-check/badge.svg)](https://github.com/Ebedthan/coremicrobiota/actions)
 [![Codecov test coverage](https://codecov.io/gh/Ebedthan/coremicrobiota/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Ebedthan/coremicrobiota?branch=main)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/08d7c6cba76849f4bfae2cc3f0ef5b17)](https://www.codacy.com/gh/Ebedthan/coremicrobiota/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ebedthan/coremicrobiota&amp;utm_campaign=Badge_Grade)
 <!-- badges: end -->
 
 ## A Simple Workflow for Core Microbiota Analysis
