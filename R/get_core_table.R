@@ -49,7 +49,7 @@ get_core_table <- function(x) {
   x["relative_abundance"] <- x["total_counts"] / total_abundance
 
   # Order data frame by relative abundance
-  x <- x[order(x["relative_abundance"], decreasing = TRUE),]
+  x <- x[order(x$relative_abundance, decreasing = TRUE),]
 
   return(x)
 }
