@@ -19,7 +19,7 @@
 #' core_microbiota(df, abundance = 0.01, ubiquity = 1, stats = TRUE)
 #'
 #' @export
-core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE) {
+core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE, toExclude = NULL) {
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
@@ -49,7 +49,21 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE) {
     }
   }
 
+  # If toExclude is not NULL, check if it is a vector or list
+  if (!is.null(toExclude)) {
+    if (!is.vector(toExclude)) {
+      stop(
+        paste0("Supplied toExclude: ", deparse(toExclude),", is not a vector nor a list.")
+      )
+    }
+  }
+
   # Data preparation -----------------------------------------------------------
+  # Remove unwanted ASVs/OTUs using their names, if values are supplied
+  if (!is.null(toExclude)) {
+    x <- x[!rownames(x) %in% toExclude,]
+  }
+
   # Get core table with relative abundance, ubiquity and total counts
   df <- get_core_table(x)
 
