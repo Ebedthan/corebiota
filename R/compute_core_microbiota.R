@@ -1,4 +1,4 @@
-#' Get core microbiota from ASV/OTU table
+#' Compute core microbiota from ASV/OTU table
 #'
 #' @param x A data frame representing a ASV/OTU table with raw counts or
 #'          phyloseq object. The ASVs/OTUs names should be set as the row
@@ -7,10 +7,9 @@
 #'                  relative abundance threshold (inclusive).
 #' @param ubiquity A number (between 0 and 100) or NULL representing the
 #'                 ubiquity of ASV/OTU in sample threshold (inclusive).
+#' @param stats A boolean value (default FALSE) to enable outputting of relative
+#'              abundance and ubiquity along ASVs/OTUs names.
 #' @param to_exclude A vector of ASVs/OTUs to exclude from analysis.
-#'
-#' @param seed A single integer value passed to `set.seed`, which is used
-#'             to fix a seed for reproducibly random number generation.
 #'
 #'
 #' @return A list of ASV/OTU names belonging to the defined core microbiota.
@@ -18,10 +17,9 @@
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 #' rownames(df) <- letters[1:10]
-#' core_microbiota(df, abundance = 0.01, ubiquity = 1)
+#' core_microbiota(df, abundance = 0.01, ubiquity = 1, stats = TRUE)
 #'
-#' @export
-core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NULL, seed = FALSE) {
+compute_core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE, to_exclude = NULL) {
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
@@ -60,43 +58,49 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
     }
   }
 
-  # Rarefying the table
-  rarefied_table <- as.data.frame(
-    phyloseq::rarefy_even_depth(
-      phyloseq::phyloseq(phyloseq::otu_table(x, taxa_are_rows = T), NULL, NULL, NULL),
-      rngseed = seed))
+  # Data preparation -----------------------------------------------------------
+  # Remove unwanted ASVs/OTUs using their names, if values are supplied
+  if (!is.null(to_exclude)) {
+    x <- x[!rownames(x) %in% to_exclude,]
+  }
 
-  # Get core rarefied biota
-  core_rarefied_biota <- compute_core_microbiota(rarefied_table, abundance = abundance, ubiquity = ubiquity, to_exclude = to_exclude)
+  # Get core table with relative abundance, ubiquity and total counts
+  df <- core_table(x)
 
+  # Start filtering using supplied parameters ----------------------------------
+  # If ubiquity is null, then filter only on abundance
+  if (is.null(ubiquity)) {
+    x <- df[which(rowSums(df[,1:length(df)-1] >= abundance) >= abundance),]
 
-  # Get core unrarefied biota
-  core_unrarefied_biota <- compute_core_microbiota(x, abundance = abundance, ubiquity = ubiquity, to_exclude = to_exclude)
+    # If abundance is null, then filter only on ubiquity
+  } else if (is.null(abundance)) {
+    x <- df[which(df["ubiquity"] >= ubiquity),]
 
-  # Get rarefaction aware index
-  rai <- rarefaction_aware_index(core_rarefied_biota, core_unrarefied_biota)
+    # Filtering using both criteria
+  } else {
+    x <- df[
+      (rowSums(df[,1:length(df)-1] >= abundance) & rowSums(df["ubiquity"] >= ubiquity)),
+    ]
+  }
 
   # Outputting -----------------------------------------------------------------
-  result <- list(core_rarefied_biota, core_unrarefied_biota, rai)
-  names(result) <- c("core rarefied biota", "core unrarefied biota", "rai")
-
-  if (length(core_rarefied_biota) == 0){
-    message(
-      paste0("No ASVs/OTUs was found at the defined abundance for the rarefied data (",
-             abundance,
-             "%) and ubiquity (",
-             ubiquity * 100,
-             "%) threshold")
+  # If stats is FALSE, then just output the number of ASVs/OTUs
+  if (!stats) {
+    if (nrow(x) == 0) {
+      message(
+        paste0("No ASVs/OTUs was found at the defined abundance (",
+               abundance,
+               "%) and ubiquity (",
+               ubiquity * 100,
+               "%) threshold")
       )
-  } else if (length(core_unrarefied_biota) == 0){
-    message(
-      paste0("No ASVs/OTUs was found at the defined abundance for the unrarefied data (",
-             abundance,
-             "%) and ubiquity (",
-             ubiquity * 100,
-             "%) threshold")
-    )
+    } else {
+      return(rownames(x))
+    }
+    # If stats is TRUE, then output ASVs/OTUs names along with relative abundance
+    # and ubiquity value
   } else {
-    return(result)
+    return(df)
   }
+
 }

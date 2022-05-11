@@ -4,14 +4,13 @@ Title: Core Microbiota Analysis
 Version: 0.1.0
 Author: Anicet Ebou
 Maintainer: Anicet Ebou <anicet.ebou@gmail.com>
-Description: Computes the core microbiota based on relative sequence
-    abundance across all samples and samples ubiquity. This package
-    provide also usefull function for plotting and exploring core
-    microbiota from a ASV/OTU table.
+Description: Provides the function to perform rarefaction aware core microbiota
+    analysis.
 License: GPL (>= 3)
+Imports:
+    phyloseq
 Suggests: 
     covr,
-    pheatmap,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8

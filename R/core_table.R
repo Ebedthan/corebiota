@@ -1,55 +1,53 @@
 #' Compute relative sequence abundance and ubiquity across all samples
 #'
-#' @param x A data frame representing a ASV/OTU table with raw counts or
+#' @param df A data frame representing a ASV/OTU table with raw counts or
 #'          phyloseq object. The ASVs/OTUs names should be set as the row
 #'          names of the data frame.
 #'
-#' @return A data frame with raw counts, relative abundance, and ubiquity of
-#'         ASVs/OTUs.
+#' @return A data frame with relative abundance, and ubiquity of ASVs/OTUs.
 #'
 #' @examples
 #' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
 #' rownames(df) <- letters[1:10]
-#' get_core_table(df)
+#' core_table(df)
 #'
 #' @export
-get_core_table <- function(x) {
+core_table <- function(df) {
   # Input validation -----------------------------------------------------------
   # If object is not a data frame or phyloseq object then stop
-  if (!is.data.frame(x) & class(x) != "phyloseq") {
+  if (!is.data.frame(df) & class(df) != "phyloseq") {
     stop(
-      paste("Supplied 'x' object is neither a data frame or a phyloseq object.",
+      paste("Supplied 'df' object is neither a data frame or a phyloseq object.",
            "\n  Please check the class of your input object:",
-           deparse(substitute(x))
+           deparse(substitute(df))
            )
     )
   }
 
   # Data preparation -----------------------------------------------------------
   # Get ASV/OTU table from phyloseq object
-  if (class(x) == "phyloseq") {
+  if (class(df) == "phyloseq") {
     # The phyloseq object is a S4 class
-    x <- as.data.frame(x@otu_table)
+    df <- as.data.frame(df@otu_table)
   }
 
   # Initial number of column for further computation
-  number_of_cols <- ncol(x)
+  number_of_cols <- ncol(df)
 
   # Ubiquity computation
-  ubiquity_vec <- round((rowSums(x != 0) / number_of_cols))
+  ubiquity_vec <- (rowSums(df != 0) / number_of_cols)
 
-  # Total count computation
-  x["total_counts"] <- rowSums(x)
-  total_abundance <- sum(x["total_counts"])
+  # Compute relative abundance
+  df <- sweep(df, 2, colSums(df), "/")
+  colnames(df) <- paste0(colnames(df), "_rel_abun")
+
 
   # Add ubiquity to data frame
-  x["ubiquity"] <- ubiquity_vec
+  df["ubiquity"] <- ubiquity_vec
 
-  # Relative abundance computing
-  x["relative_abundance"] <- x["total_counts"] / total_abundance
 
   # Order data frame by relative abundance
-  x <- x[order(x$relative_abundance, decreasing = TRUE),]
+  df <- df[order(df$ubiquity, decreasing = TRUE),]
 
-  return(x)
+  return(df)
 }
