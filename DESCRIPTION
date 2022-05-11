@@ -8,7 +8,8 @@ Description: Provides the function to perform rarefaction aware core microbiota
     analysis.
 License: GPL (>= 3)
 Imports:
-    phyloseq
+    phyloseq,
+    methods
 Suggests: 
     covr,
     testthat (>= 3.0.0)

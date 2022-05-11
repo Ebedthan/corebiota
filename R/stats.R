@@ -27,7 +27,7 @@ stats <- function(x) {
 
   # Data preparation -----------------------------------------------------------
   # Get ASV/OTU table from phyloseq object
-  if (class(x) == "phyloseq") {
+  if (methods::is(x, "phyloseq")) {
     # The phyloseq object is a S4 class
     x <- as.data.frame(x@otu_table)
   }

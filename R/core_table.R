@@ -26,7 +26,7 @@ core_table <- function(df) {
 
   # Data preparation -----------------------------------------------------------
   # Get ASV/OTU table from phyloseq object
-  if (class(df) == "phyloseq") {
+  if (methods::is(df, "phyloseq")) {
     # The phyloseq object is a S4 class
     df <- as.data.frame(df@otu_table)
   }

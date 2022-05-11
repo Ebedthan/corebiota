@@ -7,27 +7,24 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/08d7c6cba76849f4bfae2cc3f0ef5b17)](https://www.codacy.com/gh/Ebedthan/coremicrobiota/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ebedthan/coremicrobiota&amp;utm_campaign=Badge_Grade)
 <!-- badges: end -->
 
-## A Simple Workflow for Core Microbiota Analysis
+## Core Microbiota Analysis with automated accounting for library size difference
 
-The goal of coremicrobiota is to provide a set of functions to easily perform core
-microbiota analysis from an ASV/OTU table.
+The goal of coremicrobiota is to provide a set of functions to easily and efficiently perform core microbiota analysis from an ASV/OTU table. It also put emphasis on accounting library size difference in core microbiota analysis by introducing the rarefaction aware index. 
 
-*  First, with the function [`sniff`](https://ebedthan.github.io/coremicrobiota/reference/sniff.html) you can rapidly get a glimpse at how many 
-members compose your core microbiota with the given minimum relative abundance and
-ubiquity. 
-*  To have an idea of how to choose good values for your minimum relative abundance and ubiquity, you can make use of the [`distribution`](https://ebedthan.github.io/coremicrobiota/reference/distribution.html) function, which will
-plot two histograms of distribution of both values across your dataset. 
-*  Once, you are good to go you can now call the [`core_microbiota`](https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html) function to extract ASV/OTU names 
-composing your core microbiota (with their corresponding relative abundance across 
-all the dataset and ubiquity if you want). 
-*  Finally, we offer you a function [`core_heatmap`](https://ebedthan.github.io/coremicrobiota/reference/core_heatmap.html) to draw the ASVs/OTUs relative abundance across samples.
-*  A utility function [`get_core_table`](https://ebedthan.github.io/coremicrobiota/reference/get_core_table.html) is also provided to compute total counts,
-relative sequence abundance across all dataset and ubiquity for each ASV/OTU.
+The API is as follow:
 
-Yes, all the function can take as input a phyloseq object. When it is the case,
-the function `core_microbiota` return a phyloseq object.
+*  First, with the function [`core_microbiota`](https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html) you can rapidly perform a core microbiota analysis while accounting for different library size through the rarefaction aware index.
 
-This package have no external dependencies for your joy. We therefore,
+*  You can also directly compute the [`rarefaction_aware_index`](https://ebedthan.github.io/coremicrobiota/reference/rarefaction_aware_index.html), using two set of core microbiota members.
+
+Miscellaneous functions are:
+
+*  [`stats`](https://ebedthan.github.io/coremicrobiota/reference/stats.html) function which compute the overall relative abundance and ubiquity of each ASV/OTU.
+*  [`core_table`](https://ebedthan.github.io/coremicrobiota/reference/core_table.html) which return the core microbiota taxa informations in a table.
+
+Yes, all the function can take as input a phyloseq object.
+
+This package have only phyloseq as an external dependcy for your joy. We therefore,
 extensively use R Base and only pheatmap, covr and usethis as suggests.
 
 ## Installation
@@ -56,40 +53,7 @@ library(coremicrobiota)
 asv_tbl <- data.frame(sample1 = 1:10, sample2 = 10:1, sample3 = 80:89)
 rownames(asv_tbl) <- paste0("ASV", "_", 1:10)
 
-# First I want to know how many ASVs/OTUs are in my microbiota given
-# a certain minimum relative abundance and ubiquity
-
-sniff(asv_tbl)
-#> 10 ASVs/OTUs were found as members of the core microbiota
-
-# How can I choose a good value for relative abundance and ubiquity?
-distribution(asv_tbl)
-```
-<img src="man/figures/distribution.png" />
-
-```r
-# When I am good...
-core_microbiota(asv_tbl, abundance = 0.1, ubiquity = 0.25)
-
-#> [1] "ASV_6"  "ASV_7"  "ASV_8"  "ASV_9"  "ASV_10"
-
-# When I am done with core microbiota analysis...
-core_heatmamp(asv_tbl, asv_tbl, abundance = 0.1, ubiquity = 0.25)
-
-# If I want a nice table to include in my paper...
-get_core_table(asv_tbl)
-
-sample1 sample2 sample3 total_counts ubiquity relative_abundance
-ASV_1        1      10      80           91        1         0.09528796
-ASV_2        2       9      81           92        1         0.09633508
-ASV_3        3       8      82           93        1         0.09738220
-ASV_4        4       7      83           94        1         0.09842932
-ASV_5        5       6      84           95        1         0.09947644
-ASV_6        6       5      85           96        1         0.10052356
-ASV_7        7       4      86           97        1         0.10157068
-ASV_8        8       3      87           98        1         0.10261780
-ASV_9        9       2      88           99        1         0.10366492
-ASV_10      10       1      89          100        1         0.10471204
+core_microbiota(asv_tbl)
 ```
 
 Enjoy!

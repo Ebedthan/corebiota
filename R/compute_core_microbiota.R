@@ -14,11 +14,6 @@
 #'
 #' @return A list of ASV/OTU names belonging to the defined core microbiota.
 #'
-#' @examples
-#' df <- data.frame(sample_x = 1:10, sample_y = 1:10)
-#' rownames(df) <- letters[1:10]
-#' core_microbiota(df, abundance = 0.01, ubiquity = 1, stats = TRUE)
-#'
 compute_core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, stats = FALSE, to_exclude = NULL) {
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop

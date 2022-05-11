@@ -34,9 +34,3 @@ A list of ASV/OTU names belonging to the defined core microbiota.
 \description{
 Compute core microbiota from ASV/OTU table
 }
-\examples{
-df <- data.frame(sample_x = 1:10, sample_y = 1:10)
-rownames(df) <- letters[1:10]
-core_microbiota(df, abundance = 0.01, ubiquity = 1, stats = TRUE)
-
-}
