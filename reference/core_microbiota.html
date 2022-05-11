@@ -42,7 +42,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">x</span>, abundance <span class="op">=</span> <span class="fl">0.1</span>, ubiquity <span class="op">=</span> <span class="fl">0.8</span>, stats <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">core_microbiota</span><span class="op">(</span>
+  <span class="va">x</span>,
+  abundance <span class="op">=</span> <span class="fl">0.1</span>,
+  ubiquity <span class="op">=</span> <span class="fl">0.8</span>,
+  to_exclude <span class="op">=</span> <span class="cn">NULL</span>,
+  seed <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,9 +63,11 @@ relative abundance threshold (inclusive).</p></dd>
 <dt>ubiquity</dt>
 <dd><p>A number (between 0 and 100) or NULL representing the
 ubiquity of ASV/OTU in sample threshold (inclusive).</p></dd>
-<dt>stats</dt>
-<dd><p>A boolean value (default FALSE) to enable outputting of relative
-abundance and ubiquity along ASVs/OTUs names.</p></dd>
+<dt>to_exclude</dt>
+<dd><p>A vector of ASVs/OTUs to exclude from analysis.</p></dd>
+<dt>seed</dt>
+<dd><p>A single integer value passed to `set.seed`, which is used
+to fix a seed for reproducibly random number generation.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -70,18 +78,20 @@ abundance and ubiquity along ASVs/OTUs names.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sample_x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sample_y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">0.01</span>, ubiquity <span class="op">=</span> <span class="fl">1</span>, stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   relative_abundance ubiquity</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j         0.18181818        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i         0.16363636        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h         0.14545455        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g         0.12727273        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f         0.10909091        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e         0.09090909        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d         0.07272727        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c         0.05454545        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b         0.03636364        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a         0.01818182        1</span>
+<span class="r-in"><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">0.01</span>, ubiquity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> You set `rngseed` to FALSE. Make sure you've set &amp; recorded</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  the random seed of your session for reproducibility.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> See `?set.seed`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`core rarefied biota`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`core unrarefied biota`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $rai</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -94,7 +104,7 @@ abundance and ubiquity along ASVs/OTUs names.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>

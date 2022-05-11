@@ -13,21 +13,21 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/core_heatmap.html</loc>
+    <loc>/reference/compute_core_microbiota.html</loc>
   </url>
   <url>
     <loc>/reference/core_microbiota.html</loc>
   </url>
   <url>
-    <loc>/reference/distribution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_core_table.html</loc>
+    <loc>/reference/core_table.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/sniff.html</loc>
+    <loc>/reference/rarefaction_aware_index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stats.html</loc>
   </url>
 </urlset>
