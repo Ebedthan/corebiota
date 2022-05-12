@@ -33,7 +33,7 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
-    if (ubiquity < 0) {
+    if (abundance < 0) {
       stop(
         paste0("Supplied abundance: ", deparse(abundance),", is less than 0.")
       )
@@ -54,7 +54,7 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
     } else if (ubiquity > 1) {
       stop(
         paste0("Supplied ubiquity: ", deparse(ubiquity),", is greater than 1.",
-               "Did you mean ", ubiquity/100)
+               " Did you mean ", ubiquity/100)
       )
     }
   }
@@ -63,7 +63,7 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   if (!is.null(to_exclude)) {
     if (!is.vector(to_exclude)) {
       stop(
-        paste0("Supplied to_exclude: ", deparse(to_exclude),", is not a vector nor a list.")
+        paste0("Supplied to_exclude data is not a vector nor a list.")
       )
     }
   }
@@ -89,22 +89,14 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   result <- list(core_rarefied_biota, core_unrarefied_biota, difference, rai_index, xs)
   names(result) <- c("rarefied_core_biota", "unrarefied_core_biota", "diff", "rai", "seed")
 
-  if (length(core_rarefied_biota) == 0){
+  if (length(core_rarefied_biota) == 0 && length(core_unrarefied_biota) == 0){
     message(
-      paste0("No ASVs/OTUs was found at the defined abundance for the rarefied data (",
-             abundance,
+      paste0("No ASVs/OTUs was found at the defined abundance for the rarefied and unrarefied data (",
+             abundance * 100,
              "%) and ubiquity (",
              ubiquity * 100,
              "%) threshold")
       )
-  } else if (length(core_unrarefied_biota) == 0){
-    message(
-      paste0("No ASVs/OTUs was found at the defined abundance for the unrarefied data (",
-             abundance,
-             "%) and ubiquity (",
-             ubiquity * 100,
-             "%) threshold")
-    )
   } else {
     return(result)
   }
