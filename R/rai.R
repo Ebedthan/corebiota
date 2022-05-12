@@ -3,9 +3,9 @@
 #' @param rarefied_microbiota     A vector of core microbiota members
 #' @param non_rarefied_microbiota A vector of core microbiota members
 #'
-#' @return An rarefaction aware index
+#' @return A rarefaction aware index
 #'
-rarefaction_aware_index <- function(rarefied_microbiota, non_rarefied_microbiota) {
+rai <- function(rarefied_microbiota, non_rarefied_microbiota) {
 
   union <- length(intersect(non_rarefied_microbiota, rarefied_microbiota))
 

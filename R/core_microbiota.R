@@ -22,6 +22,14 @@
 #'
 #' @export
 core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NULL, seed = FALSE) {
+  # Seed management
+  xs <- 0
+  if (!seed) {
+    xs <- sample(1:2^15, 1)
+  } else {
+    xs <- seed
+  }
+
   # Input validation -----------------------------------------------------------
   # If abundance value is not NULL and not between 0 an 1 then stop
   if (!is.null(abundance)) {
@@ -64,7 +72,7 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   rarefied_table <- as.data.frame(
     phyloseq::rarefy_even_depth(
       phyloseq::phyloseq(phyloseq::otu_table(x, taxa_are_rows = T), NULL, NULL, NULL),
-      rngseed = seed))
+      rngseed = xs))
 
   # Get core rarefied biota
   core_rarefied_biota <- compute_core_microbiota(rarefied_table, abundance = abundance, ubiquity = ubiquity, to_exclude = to_exclude)
@@ -74,11 +82,12 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   core_unrarefied_biota <- compute_core_microbiota(x, abundance = abundance, ubiquity = ubiquity, to_exclude = to_exclude)
 
   # Get rarefaction aware index
-  rai <- rarefaction_aware_index(core_rarefied_biota, core_unrarefied_biota)
+  rai_index <- rai(core_rarefied_biota, core_unrarefied_biota)
 
   # Outputting -----------------------------------------------------------------
-  result <- list(core_rarefied_biota, core_unrarefied_biota, rai)
-  names(result) <- c("core rarefied biota", "core unrarefied biota", "rai")
+  difference <- union(setdiff(core_rarefied_biota, core_unrarefied_biota), setdiff(core_unrarefied_biota, core_rarefied_biota))
+  result <- list(core_rarefied_biota, core_unrarefied_biota, difference, rai_index, xs)
+  names(result) <- c("rarefied_core_biota", "unrarefied_core_biota", "diff", "rai", "seed")
 
   if (length(core_rarefied_biota) == 0){
     message(
