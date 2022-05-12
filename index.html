@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Provides the function to perform rarefaction aware core microbiota
     analysis.">
-<title>Core Microbiota Analysis • coremicrobiota</title>
+<title>Core Microbiota Analysis • corebiota</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -33,7 +33,7 @@
 
     <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
-    <a class="navbar-brand me-2" href="index.html">coremicrobiota</a>
+    <a class="navbar-brand me-2" href="index.html">corebiota</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
@@ -61,25 +61,25 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="coremicrobiota-">coremicrobiota <a class="anchor" aria-label="anchor" href="#coremicrobiota-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="corebiota-">corebiota <a class="anchor" aria-label="anchor" href="#corebiota-"></a>
 </h1>
 </div>
 <!-- badges: start -->
-<div class="section level2">
+<!-- badges: end --><div class="section level2">
 <h2 id="core-microbiota-analysis-with-automated-accounting-for-library-size-difference">Core Microbiota Analysis with automated accounting for library size difference<a class="anchor" aria-label="anchor" href="#core-microbiota-analysis-with-automated-accounting-for-library-size-difference"></a>
 </h2>
-<p>The goal of coremicrobiota is to provide a set of functions to easily and efficiently perform core microbiota analysis from an ASV/OTU table. It also put emphasis on accounting library size difference in core microbiota analysis by introducing the rarefaction aware index.</p>
+<p>The goal of corebiota is to provide a set of functions to easily and efficiently perform core microbiota analysis from an ASV/OTU table. It also put emphasis on accounting library size difference in core microbiota analysis by introducing the rarefaction aware index.</p>
 <p>The API is as follow:</p>
 <ul>
-<li><p>First, with the function <a href="https://ebedthan.github.io/coremicrobiota/reference/core_microbiota.html" class="external-link"><code>core_microbiota</code></a> you can rapidly perform a core microbiota analysis while accounting for different library size through the rarefaction aware index.</p></li>
-<li><p>You can also directly compute the <a href="https://ebedthan.github.io/coremicrobiota/reference/rarefaction_aware_index.html" class="external-link"><code>rarefaction_aware_index</code></a>, using two set of core microbiota members.</p></li>
+<li><p>First, with the function <a href="https://ebedthan.github.io/corebiota/reference/core_microbiota.html" class="external-link"><code>core_microbiota</code></a> you can rapidly perform a core microbiota analysis while accounting for different library size through the rarefaction aware index.</p></li>
+<li><p>You can also directly compute the <a href="https://ebedthan.github.io/corebiota/reference/rarefaction_aware_index.html" class="external-link"><code>rarefaction_aware_index</code></a>, using two set of core microbiota members.</p></li>
 </ul>
 <p>Miscellaneous functions are:</p>
 <ul>
 <li>
-<a href="https://ebedthan.github.io/coremicrobiota/reference/stats.html" class="external-link"><code>stats</code></a> function which compute the overall relative abundance and ubiquity of each ASV/OTU.</li>
+<a href="https://ebedthan.github.io/corebiota/reference/stats.html" class="external-link"><code>stats</code></a> function which compute the overall relative abundance and ubiquity of each ASV/OTU.</li>
 <li>
-<a href="https://ebedthan.github.io/coremicrobiota/reference/core_table.html" class="external-link"><code>core_table</code></a> which return the core microbiota taxa informations in a table.</li>
+<a href="https://ebedthan.github.io/corebiota/reference/core_table.html" class="external-link"><code>core_table</code></a> which return the core microbiota taxa informations in a table.</li>
 </ul>
 <p>Yes, all the function can take as input a phyloseq object.</p>
 <p>This package have only phyloseq as an external dependcy for your joy. We therefore, extensively use R Base and only pheatmap, covr and usethis as suggests.</p>
@@ -87,7 +87,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of coremicrobiota like so:</p>
+<p>You can install the development version of corebiota like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Install devtools package (if not already done!)</span>
 <span class="fu">install.package</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
@@ -95,15 +95,15 @@
 <span class="co"># Load devtools package</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span>
 
-<span class="co"># Install coremicrobiota package</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"Ebedthan/coremicrobiota"</span><span class="op">)</span></code></pre></div>
+<span class="co"># Install corebiota package</span>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"Ebedthan/corebiota"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">coremicrobiota</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">corebiota</span><span class="op">)</span>
 
 <span class="co"># Some fake data</span>
 <span class="va">asv_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sample1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sample2 <span class="op">=</span> <span class="fl">10</span><span class="op">:</span><span class="fl">1</span>, sample3 <span class="op">=</span> <span class="fl">80</span><span class="op">:</span><span class="fl">89</span><span class="op">)</span>
@@ -137,7 +137,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing coremicrobiota</a></li>
+<li><a href="authors.html#citation">Citing corebiota</a></li>
 </ul>
 </div>
 
@@ -151,10 +151,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Ebedthan/coremicrobiota/actions" class="external-link"><img src="https://github.com/Ebedthan/coremicrobiota/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/Ebedthan/coremicrobiota?branch=main" class="external-link"><img src="https://codecov.io/gh/Ebedthan/coremicrobiota/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/Ebedthan/corebiota/actions" class="external-link"><img src="https://github.com/Ebedthan/corebiota/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/Ebedthan/corebiota?branch=main" class="external-link"><img src="https://codecov.io/gh/Ebedthan/corebiota/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></li>
-<li><a href="https://www.codacy.com/gh/Ebedthan/coremicrobiota/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ebedthan/coremicrobiota&amp;utm_campaign=Badge_Grade" class="external-link"><img src="https://app.codacy.com/project/badge/Grade/08d7c6cba76849f4bfae2cc3f0ef5b17" alt="Codacy Badge"></a></li>
+<li><a href="https://www.codacy.com/gh/Ebedthan/corebiota/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ebedthan/corebiota&amp;utm_campaign=Badge_Grade" class="external-link"><img src="https://app.codacy.com/project/badge/Grade/08d7c6cba76849f4bfae2cc3f0ef5b17" alt="Codacy Badge"></a></li>
 </ul>
 </div>
 
