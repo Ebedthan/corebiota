@@ -1,4 +1,4 @@
-library(coremicrobiota)
+library(corebiota)
 
 set1 <- c("a", "b", "c", "d")
 set2 <- c("b", "c", "d")

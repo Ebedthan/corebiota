@@ -1,4 +1,4 @@
 library(testthat)
-library(coremicrobiota)
+library(corebiota)
 
-test_check("coremicrobiota")
+test_check("corebiota")

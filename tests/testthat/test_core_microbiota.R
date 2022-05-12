@@ -1,4 +1,4 @@
-library(coremicrobiota)
+library(corebiota)
 
 df <- data.frame(x = 1:10, y = 1:10)
 rownames(df) <- letters[1:10]
