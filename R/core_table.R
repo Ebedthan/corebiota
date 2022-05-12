@@ -16,12 +16,7 @@ core_table <- function(df) {
   # Input validation -----------------------------------------------------------
   # If object is not a data frame or phyloseq object then stop
   if (!is.data.frame(df) & class(df) != "phyloseq") {
-    stop(
-      paste("Supplied 'df' object is neither a data frame or a phyloseq object.",
-           "\n  Please check the class of your input object:",
-           deparse(substitute(df))
-           )
-    )
+    stop("Supplied 'df' object is neither a data frame or a phyloseq object.")
   }
 
   # Data preparation -----------------------------------------------------------

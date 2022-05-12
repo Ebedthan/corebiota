@@ -11,3 +11,7 @@ rownames(res) <- rev(letters[1:10])
 test_that("get stats", {
   expect_equal(stats(df), res)
 })
+
+test_that("error", {
+  expect_error(stats("a"), "Supplied 'x' object is neither a data frame or a phyloseq object")
+})

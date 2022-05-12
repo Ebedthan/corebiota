@@ -16,13 +16,8 @@
 stats <- function(x) {
   # Input validation -----------------------------------------------------------
   # If object is not a data frame or phyloseq object then stop
-  if (!is.data.frame(x) & class(x) != "phyloseq") {
-    stop(
-      paste("Supplied 'x' object is neither a data frame or a phyloseq object.",
-            "\n  Please check the class of your input object:",
-            deparse(substitute(x))
-      )
-    )
+  if (!is.data.frame(x) | methods::is(x, "phyloseq")) {
+    stop("Supplied 'x' object is neither a data frame or a phyloseq object.")
   }
 
   # Data preparation -----------------------------------------------------------
