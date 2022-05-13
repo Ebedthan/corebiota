@@ -14,7 +14,7 @@ The API is as follow:
 
 -   First, with the function [`core_microbiota`](https://ebedthan.github.io/corebiota/reference/core_microbiota.html) you can rapidly perform a core microbiota analysis while accounting for different library size through the rarefaction aware index.
 
--   You can also directly compute the [`rarefaction_aware_index`](https://ebedthan.github.io/corebiota/reference/rarefaction_aware_index.html), using two set of core microbiota members.
+-   You can also directly compute the [`rai`](https://ebedthan.github.io/corebiota/reference/rai.html), using two set of core microbiota members.
 
 Miscellaneous functions are:
 
@@ -59,5 +59,5 @@ Enjoy!
 ## Some great papers on designing a core microbiota analysis
 
 -   Neu, A.T., Allen, E.E., Roy, K., 2021. Defining and quantifying the core microbiome: Challenges and prospects. PNAS 118. <https://doi.org/10.1073/pnas.2104429118>
--   Berg, G., Rybakova, D., Fischer, D., Cernava, T., Vergès, M.-C.C., Charles, T., Chen, X., Cocolin, L., Eversole, K., Corral, G.H., Kazou, M., Kinkel, L., Lange, L., Lima, N., Loy, A., Macklin, J.A., Maguin, E., Mauchline, T., McClure, R., Mitter, B., Ryan, M., Sarand, I., Smidt, H., Schelkle, B., Roume, H., Kiran, G.S., Selvin, J., Souza, R.S.C. de, van Overbeek, L., Singh, B.K., Wagner, M., Walsh, A., Sessitsch, A., Schloter, M., 2020. Microbiome definition re-visited: old concepts and new challenges. Microbiome 8, 103. <https://doi.org/10.1186/s40168-020-00875-0>
--   Astudillo‐García, C., Bell, J.J., Webster, N.S., Glasl, B., Jompa, J., Montoya, J.M., Taylor, M.W., 2017. Evaluating the core microbiota in complex communities: A systematic investigation. Environ Microbiol 19, 1450–1462. <https://doi.org/10.1111/1462-2920.13647>
+-   Berg, G., Rybakova, D., Fischer, D. et al., 2020. Microbiome definition re-visited: old concepts and new challenges. Microbiome 8, 103. <https://doi.org/10.1186/s40168-020-00875-0>
+-   Astudillo‐García, C., Bell, J.J., Webster, N.S. et al., 2017. Evaluating the core microbiota in complex communities: A systematic investigation. Environ Microbiol 19, 1450–1462. <https://doi.org/10.1111/1462-2920.13647>
