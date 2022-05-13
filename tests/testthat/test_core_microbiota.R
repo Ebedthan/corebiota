@@ -13,6 +13,12 @@ test_that("cma with seed", {
 
 #> Test passed 🎉
 
+test_that("core microbiota", {
+  expect_message(core_microbiota(df, abundance = 0.9), "No ASVs/OTUs was found at the defined abundance and ubiquity threshold")
+})
+
+#> Test passed 🎉
+
 res <- list(c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), character(0), 1, 123)
 names(res) <- c("rarefied_core_biota", "unrarefied_core_biota", "diff", "rai", "seed")
 cma <- core_microbiota(df)

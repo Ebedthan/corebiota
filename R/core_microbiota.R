@@ -89,14 +89,8 @@ core_microbiota <- function(x, abundance = 0.1, ubiquity = 0.8, to_exclude = NUL
   result <- list(core_rarefied_biota, core_unrarefied_biota, difference, rai_index, xs)
   names(result) <- c("rarefied_core_biota", "unrarefied_core_biota", "diff", "rai", "seed")
 
-  if (length(core_rarefied_biota) == 0 & length(core_unrarefied_biota) == 0){
-    message(
-      paste0("No ASVs/OTUs was found at the defined abundance for the rarefied and unrarefied data (",
-             abundance * 100,
-             "%) and ubiquity (",
-             ubiquity * 100,
-             "%) threshold")
-      )
+  if (length(core_rarefied_biota) == 0 & length(core_unrarefied_biota) == 0) {
+    message("No ASVs/OTUs was found at the defined abundance and ubiquity threshold")
   } else {
     return(result)
   }
