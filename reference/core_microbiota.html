@@ -79,27 +79,24 @@ to fix a seed for reproducibly random number generation.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sample_x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sample_y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
 <span class="r-in"><span class="fu">core_microbiota</span><span class="op">(</span><span class="va">df</span>, abundance <span class="op">=</span> <span class="fl">0.01</span>, ubiquity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `set.seed(19529)` was used to initialize repeatable random subsampling.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `set.seed(32068)` was used to initialize repeatable random subsampling.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Please record this for your records so others can reproduce.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Try `set.seed(19529); .Random.seed` for the full vector</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1OTUs were removed because they are no longer </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> present in any sample after random subsampling</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Try `set.seed(32068); .Random.seed` for the full vector</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rarefied_core_biota</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d" "e" "f" "g" "h" "i" "j"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $unrarefied_core_biota</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $diff</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b" "c"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rai</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
