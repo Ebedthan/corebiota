@@ -22,7 +22,7 @@ Modelling species abundance distribution of ASV/OTU following Poisson
 distribution
 }
 \examples{
-df <- data.frame(x = seq(0,10), y = seq(11,21))
+df <- data.frame(x=seq(0,10), y = seq(11,21))
 sad(df)
 
 }

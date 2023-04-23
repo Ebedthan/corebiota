@@ -3,8 +3,6 @@
 #'
 #' @param x A data frame representing a ASV/OTU table with raw counts or
 #'          phyloseq object.
-#' @param taxa_are_rows A single logical specifying the orientation of
-#'                      the abundance table.
 #'
 #' @return A data frame of species abundance distribution
 #'
@@ -13,11 +11,11 @@
 #' sad(df)
 #'
 #' @export
-sad <- function(x, taxa_are_rows=FALSE) {
+sad <- function(x) {
     # Check data validity ------------------------------------------------------
-    if (!is.data.frame(x) || methods::is(x, "phyloseq")) {
+    if (!is.data.frame(x) && !methods::is(x, "phyloseq")) {
         stop(
-            "Supplied 'x' object is neither a data frame or a phyloseq object."
+            "supplied object is neither a data frame or a phyloseq object."
             )
     }
 
@@ -28,11 +26,7 @@ sad <- function(x, taxa_are_rows=FALSE) {
     }
 
     # ASV/OTU sample's occupancy calculation
-    if (!taxa_are_rows) {
-      occupancy <- colSums(x != 0)
-    } else {
-      occupancy <- rowSums(t(x) != 0)
-    }
+    occupancy <- colSums(x != 0)
 
     # matrix transformation and zero removal in data
     x_na <- as.matrix(x)
