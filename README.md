@@ -6,20 +6,20 @@
 
 <!-- badges: end -->
 
-## Core Microbiota Analysis with automated accounting for library size difference
+## Probabilistic core microbiota analysis
 
-The goal of corebiota is to provide a set of functions to easily and efficiently perform core microbiota analysis from an ASV/OTU table. It also put emphasis on accounting library size difference in core microbiota analysis by introducing the rarefaction aware index.
+The goal of corebiota is to provide a set of functions to easily and robustly perform core microbiota analysis from an ASV/OTU table. It also put emphasis on robustness by providing a probabilistic framework and reproducibility.
 
 The API is as follow:
 
--   First, with the function [`core_microbiota`](https://ebedthan.github.io/corebiota/reference/core_microbiota.html) you can rapidly perform a core microbiota analysis while accounting for different library size through the rarefaction aware index.
+-   First, with the function [`sad`](https://ebedthan.github.io/corebiota/reference/sad.html) you can rapidly perform a species abundance distribution modeling following a Poisson distribution and identify microbes belonging to either core or satellite group in your community.
 
--   You can also directly compute the [`rai`](https://ebedthan.github.io/corebiota/reference/rai.html), using two set of core microbiota members.
+-   You can also directly get the core microbiota through [`get_core`](https://ebedthan.github.io/corebiota/reference/get_core.html).
 
-Miscellaneous functions are:
+Miscellaneous functions, nonetheless important, are:
 
--   [`stats`](https://ebedthan.github.io/corebiota/reference/stats.html) function which compute the overall relative abundance and ubiquity of each ASV/OTU.
--   [`core_table`](https://ebedthan.github.io/corebiota/reference/core_table.html) which return the core microbiota taxa informations in a table.
+-   [`plot_graph`](https://ebedthan.github.io/corebiota/reference/plot_graph.html) function which plot a nice graph showin the partition of you microbiome into satellite and core members.
+-   [`get_satellite`](https://ebedthan.github.io/corebiota/reference/get_satellite.html) which return the satellite members of your community.
 
 Yes, all the function can take as input a phyloseq object.
 
@@ -51,7 +51,7 @@ library(corebiota)
 asv_tbl <- data.frame(sample1 = 1:10, sample2 = 10:1, sample3 = 80:89)
 rownames(asv_tbl) <- paste0("ASV", "_", 1:10)
 
-core_microbiota(asv_tbl)
+sad(asv_tbl)
 ```
 
 Enjoy!
