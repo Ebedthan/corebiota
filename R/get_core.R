@@ -2,8 +2,6 @@
 #'
 #' @param x A data frame representing a ASV/OTU table with raw counts or
 #'          phyloseq object.
-#' @param taxa_are_rows A single logical specifying the orientation of
-#'                      the abundance table.
 #'
 #' @return A data frame of species abundance distribution of core microbiome.
 #'
@@ -12,7 +10,7 @@
 #' get_core(df)
 #'
 #' @export
-get_core <- function(x, taxa_are_rows=FALSE) {
-    xsad <- sad(x, taxa_are_rows=taxa_are_rows)
+get_core <- function(x) {
+    xsad <- sad(x)
     return(xsad[xsad$type=="core", ])
 }

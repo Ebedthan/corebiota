@@ -4,14 +4,11 @@
 \alias{get_satellite}
 \title{Get satellite microbiota based on ASV Poisson modelling}
 \usage{
-get_satellite(x, taxa_are_rows = FALSE)
+get_satellite(x)
 }
 \arguments{
 \item{x}{A data frame representing a ASV/OTU table with raw counts or
 phyloseq object.}
-
-\item{taxa_are_rows}{A single logical specifying the orientation of
-the abundance table.}
 }
 \value{
 A data frame of species abundance distribution of satellite species
