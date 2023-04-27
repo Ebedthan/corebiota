@@ -9,7 +9,8 @@ Description: Probabilistic core microbiota identification using
 License: GPL (>= 3)
 Imports:
     matrixStats,
-    methods
+    methods,
+    phyloseq
 Suggests: 
     covr,
     testthat (>= 3.0.0)

@@ -4,11 +4,13 @@
 \alias{get_core}
 \title{Get core microbiota based on ASV Poisson modelling}
 \usage{
-get_core(x)
+get_core(x, taxa_are_rows = F)
 }
 \arguments{
 \item{x}{A data frame representing a ASV/OTU table with raw counts or
 phyloseq object.}
+
+\item{taxa_are_rows}{A logical indicating if OTU are rows}
 }
 \value{
 A data frame of species abundance distribution of core microbiome.

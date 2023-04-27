@@ -5,11 +5,13 @@
 \title{Modelling species abundance distribution of ASV/OTU following Poisson
 distribution}
 \usage{
-sad(x)
+sad(x, taxa_are_rows = FALSE)
 }
 \arguments{
 \item{x}{A data frame representing a ASV/OTU table with raw counts or
 phyloseq object.}
+
+\item{taxa_are_rows}{A logical indicating if OTU are rows}
 }
 \value{
 A data frame of species abundance distribution
