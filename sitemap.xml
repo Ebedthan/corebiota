@@ -13,21 +13,18 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_core_microbiota.html</loc>
+    <loc>/reference/get_core.html</loc>
   </url>
   <url>
-    <loc>/reference/core_microbiota.html</loc>
-  </url>
-  <url>
-    <loc>/reference/core_table.html</loc>
+    <loc>/reference/get_satellite.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/rai.html</loc>
+    <loc>/reference/plot_graph.html</loc>
   </url>
   <url>
-    <loc>/reference/stats.html</loc>
+    <loc>/reference/sad.html</loc>
   </url>
 </urlset>
